@@ -8,7 +8,7 @@ export const pool = new Pool({
     port: Number(process.env.DB_PORT),
     database: process.env.DB_NAME,
 });
-console.log(pool);
+
 
 pool.on("error", (err) => {
     console.error("Unexpected PostgreSQL pool error:", err);
