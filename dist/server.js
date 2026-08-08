@@ -1,12 +1,21 @@
 import express from "express";
+import path from "path";
+import { fileURLToPath } from "url";
 import 'dotenv/config';
 import { urlRouter } from "./routes/urlRouter.js";
-import { redirectUrl } from "./routes/urlController.js";
+const __filename = fileURLToPath(import.meta.url);
+const __dirname = path.dirname(__filename);
 const port = Number(process.env.PORT) || 3000;
 const app = express();
 app.use(express.json());
+// Serve static frontend files
+app.use(express.static(path.join(__dirname, "view")));
+// API routes
 app.use('/api', urlRouter);
-app.get('/:code', redirectUrl);
+// Root serves the frontend
+app.get("/", (_req, res) => {
+    res.sendFile(path.join(__dirname, "view", "index.html"));
+});
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

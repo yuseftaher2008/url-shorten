@@ -1,0 +1,394 @@
+/* ============================================
+   Design Tokens
+   ============================================ */
+:root {
+  /* Palette — midnight + warm amber accent */
+  --color-bg:        #0c0e14;
+  --color-surface:   #14171f;
+  --color-border:    #1e2230;
+  --color-text:      #e8e9ed;
+  --color-muted:     #6b7084;
+  --color-accent:    #f59e0b;
+  --color-accent-2:  #fbbf24;
+  --color-error:     #ef4444;
+
+  /* Typography */
+  --font-display:    'Space Grotesk', system-ui, sans-serif;
+  --font-body:       'Inter', system-ui, sans-serif;
+
+  /* Scale */
+  --text-sm:   0.8125rem;
+  --text-base: 1rem;
+  --text-md:   1.125rem;
+  --text-lg:   1.375rem;
+  --text-xl:   2rem;
+  --text-hero: clamp(2.4rem, 5vw, 3.5rem);
+
+  /* Spacing */
+  --space-xs:  0.375rem;
+  --space-sm:  0.75rem;
+  --space-md:  1.25rem;
+  --space-lg:  2rem;
+  --space-xl:  3.5rem;
+  --space-2xl: 6rem;
+
+  /* Radii */
+  --radius-sm: 6px;
+  --radius-md: 10px;
+}
+
+/* ============================================
+   Reset & Base
+   ============================================ */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: var(--color-text);
+  background: var(--color-bg);
+  min-height: 100dvh;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Screen reader only */
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* ============================================
+   Accent Bar — the one bold gesture
+   ============================================ */
+.accent-bar {
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-accent) 0%,
+    var(--color-accent-2) 50%,
+    var(--color-accent) 100%
+  );
+  flex-shrink: 0;
+}
+
+/* ============================================
+   Main Layout
+   ============================================ */
+.main {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: var(--space-lg);
+  gap: var(--space-lg);
+}
+
+/* ============================================
+   Header
+   ============================================ */
+.header {
+  text-align: center;
+  margin-bottom: var(--space-md);
+}
+
+.logo {
+  font-family: var(--font-display);
+  font-size: var(--text-hero);
+  font-weight: 700;
+  letter-spacing: -0.03em;
+  line-height: 1.1;
+  color: var(--color-text);
+}
+
+.dot {
+  color: var(--color-accent);
+}
+
+.tagline {
+  margin-top: var(--space-sm);
+  font-size: var(--text-md);
+  color: var(--color-muted);
+  font-weight: 400;
+}
+
+/* ============================================
+   Form
+   ============================================ */
+.form {
+  display: flex;
+  width: 100%;
+  max-width: 560px;
+  gap: var(--space-sm);
+}
+
+.input-wrap {
+  flex: 1;
+  position: relative;
+}
+
+.input {
+  width: 100%;
+  padding: var(--space-sm) var(--space-md);
+  font-family: var(--font-body);
+  font-size: var(--text-base);
+  color: var(--color-text);
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  outline: none;
+  transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+.input::placeholder {
+  color: var(--color-muted);
+}
+
+.input:focus {
+  border-color: var(--color-accent);
+  box-shadow: 0 0 0 3px rgba(245, 158, 11, 0.15);
+}
+
+/* ============================================
+   Button
+   ============================================ */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-xs);
+  padding: var(--space-sm) var(--space-lg);
+  font-family: var(--font-display);
+  font-size: var(--text-base);
+  font-weight: 600;
+  color: var(--color-bg);
+  background: var(--color-accent);
+  border: none;
+  border-radius: var(--radius-md);
+  cursor: pointer;
+  white-space: nowrap;
+  transition: background 0.15s, transform 0.1s;
+}
+
+.btn:hover {
+  background: var(--color-accent-2);
+}
+
+.btn:active {
+  transform: scale(0.97);
+}
+
+.btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.btn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.btn-loader {
+  display: none;
+  width: 16px;
+  height: 16px;
+  border: 2px solid rgba(12, 14, 20, 0.3);
+  border-top-color: var(--color-bg);
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+.btn.is-loading .btn-text {
+  display: none;
+}
+
+.btn.is-loading .btn-loader {
+  display: block;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+/* ============================================
+   Result
+   ============================================ */
+.result-section {
+  width: 100%;
+  max-width: 560px;
+}
+
+.result {
+  background: var(--color-surface);
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+  animation: fadeSlideUp 0.3s ease-out;
+}
+
+.result-label {
+  display: block;
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-muted);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  margin-bottom: var(--space-xs);
+}
+
+.result-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: var(--space-sm);
+}
+
+.result-url {
+  font-family: var(--font-display);
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--color-accent);
+  word-break: break-all;
+  line-height: 1.4;
+}
+
+.copy-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  font-family: var(--font-body);
+  font-size: var(--text-sm);
+  font-weight: 500;
+  color: var(--color-text);
+  background: transparent;
+  border: 1px solid var(--color-border);
+  border-radius: var(--radius-sm);
+  cursor: pointer;
+  white-space: nowrap;
+  flex-shrink: 0;
+  transition: border-color 0.15s, color 0.15s;
+}
+
+.copy-btn:hover {
+  border-color: var(--color-muted);
+  color: var(--color-accent);
+}
+
+.copy-btn:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 2px;
+}
+
+.copy-btn.is-copied {
+  border-color: var(--color-accent);
+  color: var(--color-accent);
+}
+
+.copy-icon {
+  width: 16px;
+  height: 16px;
+}
+
+/* ============================================
+   Error
+   ============================================ */
+.error-section {
+  width: 100%;
+  max-width: 560px;
+}
+
+.error {
+  background: rgba(239, 68, 68, 0.08);
+  border: 1px solid rgba(239, 68, 68, 0.25);
+  border-radius: var(--radius-md);
+  padding: var(--space-sm) var(--space-md);
+  animation: fadeSlideUp 0.25s ease-out;
+}
+
+.error-text {
+  font-size: var(--text-sm);
+  color: var(--color-error);
+  font-weight: 500;
+}
+
+/* ============================================
+   Footer
+   ============================================ */
+.footer {
+  text-align: center;
+  padding: var(--space-lg);
+  font-size: var(--text-sm);
+  color: var(--color-muted);
+}
+
+/* ============================================
+   Animations
+   ============================================ */
+@keyframes fadeSlideUp {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ============================================
+   Responsive
+   ============================================ */
+@media (max-width: 600px) {
+  .main {
+    padding: var(--space-md);
+  }
+
+  .form {
+    flex-direction: column;
+  }
+
+  .btn {
+    width: 100%;
+    padding: var(--space-sm);
+  }
+
+  .result-row {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .copy-btn {
+    align-self: flex-end;
+  }
+}
+
+/* ============================================
+   Reduced motion
+   ============================================ */
+@media (prefers-reduced-motion: reduce) {
+  *, *::before, *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+}

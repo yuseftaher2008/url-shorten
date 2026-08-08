@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>shrink — URL Shortener</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="accent-bar" aria-hidden="true"></div>
+
+  <main class="main">
+    <header class="header">
+      <h1 class="logo">shrink<span class="dot">.</span></h1>
+      <p class="tagline">Turn any link into something manageable.</p>
+    </header>
+
+    <section class="shorten" aria-label="Shorten a URL">
+      <form id="shorten-form" class="form" novalidate>
+        <div class="input-wrap">
+          <label for="url-input" class="sr-only">Paste a long URL</label>
+          <input
+            id="url-input"
+            class="input"
+            type="url"
+            placeholder="Paste a long URL..."
+            required
+            autocomplete="off"
+            spellcheck="false"
+          />
+        </div>
+        <button type="submit" class="btn" id="shorten-btn">
+          <span class="btn-text">Shorten</span>
+          <span class="btn-loader" aria-hidden="true"></span>
+        </button>
+      </form>
+    </section>
+
+    <section class="result-section" id="result-section" aria-live="polite" hidden>
+      <div class="result" id="result-box">
+        <span class="result-label">Your short link</span>
+        <div class="result-row">
+          <output class="result-url" id="result-url"></output>
+          <button class="copy-btn" id="copy-btn" type="button" title="Copy to clipboard">
+            <svg class="copy-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
+              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
+            </svg>
+            <span class="copy-label" id="copy-label">Copy</span>
+          </button>
+        </div>
+      </div>
+    </section>
+
+    <section class="error-section" id="error-section" aria-live="assertive" hidden>
+      <div class="error" id="error-box">
+        <span class="error-text" id="error-text"></span>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>Built with care</span>
+  </footer>
+
+  <script type="module" src="app.js"></script>
+</body>
+</html>
