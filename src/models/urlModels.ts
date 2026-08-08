@@ -15,3 +15,11 @@ export async function findByCode(shortCode: string) {
     );
     return result.rows[0];
 }
+
+export async function findByOriginalUrl(originalUrl: string) {
+    const result = await pool.query(
+        `SELECT * FROM urls WHERE original_url = $1`,
+        [originalUrl]
+    );
+    return result.rows[0];
+}

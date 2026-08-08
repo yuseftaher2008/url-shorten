@@ -1,6 +1,6 @@
 import type { Request, Response } from "express";
 import { nanoid } from 'nanoid';
-import { addUrl, findByCode } from "../models/urlModels.js";
+import { addUrl, findByCode, findByOriginalUrl } from "../models/urlModels.js";
 
 export async function createShortenUrl(req: Request, res: Response) {
     const { url } = req.body;
@@ -9,6 +9,20 @@ export async function createShortenUrl(req: Request, res: Response) {
     }
 
     try {
+        const parsed = new URL(url);
+        if (parsed.protocol !== "http:" && parsed.protocol !== "https:") {
+            return res.status(400).json({ message: "Invalid URL format" });
+        }
+    } catch {
+        return res.status(400).json({ message: "Invalid URL format" });
+    }
+
+    try {
+        const existing = await findByOriginalUrl(url);
+        if (existing) {
+            return res.status(200).json({ shortUrl: `http://localhost:${process.env.PORT || 3000}/api/${existing.short_code}` });
+        }
+
         const shortCode: string = nanoid(6);
         const newUrl = await addUrl(url, shortCode);
         return res.status(201).json({ shortUrl: `http://localhost:${process.env.PORT || 3000}/api/${newUrl.short_code}` });
