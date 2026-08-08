@@ -11,7 +11,7 @@ export async function createShortenUrl(req: Request, res: Response) {
     try {
         const shortCode: string = nanoid(6);
         const newUrl = await addUrl(url, shortCode);
-        return res.status(201).json({ shortUrl: `http://localhost:${process.env.PORT || 3000}/${newUrl.short_code}` });
+        return res.status(201).json({ shortUrl: `http://localhost:${process.env.PORT || 3000}/api/${newUrl.short_code}` });
     } catch (error) {
         console.error("Error creating short URL:", error);
         return res.status(500).json({ message: "Internal server error" });

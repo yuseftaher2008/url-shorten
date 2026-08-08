@@ -12,10 +12,6 @@ app.use(express.json());
 app.use(express.static(path.join(__dirname, "view")));
 // API routes
 app.use('/api', urlRouter);
-// Root serves the frontend
-app.get("/", (_req, res) => {
-    res.sendFile(path.join(__dirname, "view", "index.html"));
-});
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);
 });

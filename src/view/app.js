@@ -1,26 +1,28 @@
 const form = document.getElementById('shorten-form');
 const input = document.getElementById('url-input');
 const shortenBtn = document.getElementById('shorten-btn');
-const resultSection = document.getElementById('result-section');
-const resultUrl = document.getElementById('result-url');
+const resultArea = document.getElementById('result-area');
+const resultOriginal = document.getElementById('result-original');
+const resultShort = document.getElementById('result-short');
 const copyBtn = document.getElementById('copy-btn');
 const copyLabel = document.getElementById('copy-label');
-const errorSection = document.getElementById('error-section');
+const errorArea = document.getElementById('error-area');
 const errorText = document.getElementById('error-text');
 
 function showError(message) {
   errorText.textContent = message;
-  errorSection.hidden = false;
-  resultSection.hidden = true;
+  errorArea.hidden = false;
+  resultArea.hidden = true;
 }
 
 function hideError() {
-  errorSection.hidden = true;
+  errorArea.hidden = true;
 }
 
-function showResult(shortUrl) {
-  resultUrl.textContent = shortUrl;
-  resultSection.hidden = false;
+function showResult(originalUrl, shortUrl) {
+  resultOriginal.textContent = originalUrl;
+  resultShort.textContent = shortUrl;
+  resultArea.hidden = false;
   hideError();
 }
 
@@ -74,7 +76,7 @@ form.addEventListener('submit', async (e) => {
       return;
     }
 
-    showResult(data.shortUrl);
+    showResult(url, data.shortUrl);
   } catch (err) {
     showError('Could not reach the server. Is it running?');
   } finally {
@@ -83,7 +85,7 @@ form.addEventListener('submit', async (e) => {
 });
 
 copyBtn.addEventListener('click', async () => {
-  const url = resultUrl.textContent;
+  const url = resultShort.textContent;
   if (!url) return;
 
   try {
@@ -95,7 +97,6 @@ copyBtn.addEventListener('click', async () => {
       copyBtn.classList.remove('is-copied');
     }, 2000);
   } catch {
-    // Fallback for older browsers
     const textarea = document.createElement('textarea');
     textarea.value = url;
     textarea.style.position = 'fixed';
@@ -113,5 +114,4 @@ copyBtn.addEventListener('click', async () => {
   }
 });
 
-// Auto-focus input on load
 input.focus();

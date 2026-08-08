@@ -1,69 +1,139 @@
 <!DOCTYPE html>
-<html lang="en">
+<html class="dark" lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>shrink — URL Shortener</title>
+  <title>SwiftLink — Precision URL Management</title>
   <link rel="preconnect" href="https://fonts.googleapis.com" />
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-  <link href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;600;700&family=Inter:wght@400;500&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Geist:wght@500;600;700&display=swap" rel="stylesheet" />
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet" />
   <link rel="stylesheet" href="styles.css" />
 </head>
 <body>
-  <div class="accent-bar" aria-hidden="true"></div>
 
-  <main class="main">
-    <header class="header">
-      <h1 class="logo">shrink<span class="dot">.</span></h1>
-      <p class="tagline">Turn any link into something manageable.</p>
-    </header>
+  <!-- Nav -->
+  <header class="topnav">
+    <div class="topnav-inner">
+      <div class="topnav-brand">
+        <span class="brand-name">SwiftLink</span>
+      </div>
+      <nav class="topnav-links">
+        <a href="#how-it-works" class="nav-link">How it works</a>
+      </nav>
+      <div class="topnav-actions"></div>
+    </div>
+  </header>
 
-    <section class="shorten" aria-label="Shorten a URL">
-      <form id="shorten-form" class="form" novalidate>
-        <div class="input-wrap">
-          <label for="url-input" class="sr-only">Paste a long URL</label>
-          <input
-            id="url-input"
-            class="input"
-            type="url"
-            placeholder="Paste a long URL..."
-            required
-            autocomplete="off"
-            spellcheck="false"
-          />
-        </div>
-        <button type="submit" class="btn" id="shorten-btn">
-          <span class="btn-text">Shorten</span>
-          <span class="btn-loader" aria-hidden="true"></span>
-        </button>
-      </form>
-    </section>
+  <!-- Main -->
+  <main class="main-content">
 
-    <section class="result-section" id="result-section" aria-live="polite" hidden>
-      <div class="result" id="result-box">
-        <span class="result-label">Your short link</span>
-        <div class="result-row">
-          <output class="result-url" id="result-url"></output>
+    <!-- Background glow -->
+    <div class="bg-glow" aria-hidden="true"></div>
+
+    <div class="hero">
+
+      <!-- Headlines -->
+      <div class="hero-text">
+        <h1 class="hero-title">
+          Shorten your links, <span class="text-accent">broaden your reach.</span>
+        </h1>
+        <p class="hero-subtitle">Create concise, powerful links that track and perform.</p>
+      </div>
+
+      <!-- URL Input -->
+      <div class="input-area">
+        <form id="shorten-form" class="input-bar" novalidate>
+          <div class="input-field">
+            <span class="material-symbols-outlined input-icon">link</span>
+            <label for="url-input" class="sr-only">Paste your long URL</label>
+            <input
+              id="url-input"
+              class="url-input"
+              type="url"
+              placeholder="Paste your long URL here..."
+              required
+              autocomplete="off"
+              spellcheck="false"
+            />
+          </div>
+          <button type="submit" class="shorten-btn" id="shorten-btn">
+            <span class="btn-label">Shorten</span>
+            <span class="material-symbols-outlined btn-icon">bolt</span>
+            <span class="btn-spinner" aria-hidden="true"></span>
+          </button>
+        </form>
+      </div>
+
+      <!-- Result -->
+      <div class="result-area" id="result-area" hidden>
+        <div class="result-card">
+          <div class="result-content">
+            <div class="result-icon-wrap">
+              <span class="material-symbols-outlined result-icon">check_circle</span>
+            </div>
+            <div class="result-urls">
+              <span class="result-original" id="result-original"></span>
+              <span class="result-short" id="result-short"></span>
+            </div>
+          </div>
           <button class="copy-btn" id="copy-btn" type="button" title="Copy to clipboard">
-            <svg class="copy-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-              <rect x="9" y="9" width="13" height="13" rx="2" ry="2"></rect>
-              <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1"></path>
-            </svg>
+            <span class="material-symbols-outlined copy-icon">content_copy</span>
             <span class="copy-label" id="copy-label">Copy</span>
           </button>
         </div>
       </div>
-    </section>
 
-    <section class="error-section" id="error-section" aria-live="assertive" hidden>
-      <div class="error" id="error-box">
-        <span class="error-text" id="error-text"></span>
+      <!-- Error -->
+      <div class="error-area" id="error-area" hidden>
+        <div class="error-card">
+          <span class="material-symbols-outlined error-icon">error</span>
+          <span class="error-text" id="error-text"></span>
+        </div>
       </div>
-    </section>
+
+      <!-- Features -->
+      <div class="features" id="how-it-works">
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <span class="material-symbols-outlined feature-icon text-accent">speed</span>
+          </div>
+          <h3 class="feature-title">Instant Generation</h3>
+          <p class="feature-desc">Lightning-fast redirects powered by edge computing infrastructure.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <span class="material-symbols-outlined feature-icon text-cyan">monitoring</span>
+          </div>
+          <h3 class="feature-title">Detailed Analytics</h3>
+          <p class="feature-desc">Track clicks, geographic data, and referrers in real-time dashboards.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon-wrap">
+            <span class="material-symbols-outlined feature-icon text-amber">tune</span>
+          </div>
+          <h3 class="feature-title">Custom Aliases</h3>
+          <p class="feature-desc">Brand your links with custom domains and personalized slugs.</p>
+        </div>
+      </div>
+
+    </div>
   </main>
 
+  <!-- Footer -->
   <footer class="footer">
-    <span>Built with care</span>
+    <div class="footer-inner">
+      <div class="footer-brand">
+        <span class="brand-name brand-sm">SwiftLink</span>
+        <span class="footer-copy">&copy; 2026 SwiftLink. Precision URL Management.</span>
+      </div>
+      <nav class="footer-links">
+        <a href="#" class="footer-link">Privacy Policy</a>
+        <a href="#" class="footer-link">Terms of Service</a>
+        <a href="#" class="footer-link">API Docs</a>
+        <a href="#" class="footer-link">Contact</a>
+      </nav>
+    </div>
   </footer>
 
   <script type="module" src="app.js"></script>
